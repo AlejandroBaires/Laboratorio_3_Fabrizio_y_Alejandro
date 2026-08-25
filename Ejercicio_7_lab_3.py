@@ -1,8 +1,115 @@
 import random
+import time
 
-datos = [random.randint(1, 100) for _ in range(20)]
+# ==============================================
+# ORDENAMIENTO DE HEAP SORT
+# ==============================================
 
-print("Lista original:")
-print(datos)
+def heapify(arr, n, i):
+    """
+    Mantiene la propiedad de Max Heap en el subárbol
+    cuyo nodo raíz está en la posición i.
+    """
+    mayor = i
+    izquierdo = 2 * i + 1
+    derecho = 2 * i + 2
 
-lista = datos.copy()
+    # Si el hijo izquierdo es mayor que la raíz
+    if izquierdo < n and arr[izquierdo] > arr[mayor]:
+        mayor = izquierdo
+
+    # Si el hijo derecho es mayor que el mayor actual
+    if derecho < n and arr[derecho] > arr[mayor]:
+        mayor = derecho
+
+    # Si el mayor no es la raíz
+    if mayor != i:
+        arr[i], arr[mayor] = arr[mayor], arr[i]
+
+        # Aplicar heapify nuevamente
+        heapify(arr, n, mayor)
+
+def heap_sort(arr, mostrar=False):
+    n = len(arr)
+    # --------------------------------------
+    # 1. Construir Max Heap
+    # --------------------------------------
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+
+    if mostrar:
+        print("\n2. Max Heap construido:")
+        print(arr)
+    # --------------------------------------
+    # 2. Extraer elementos
+    # --------------------------------------
+    if mostrar:
+        print("\n3. Estado del arreglo después de cada extracción:")
+    for i in range(n - 1, 0, -1):
+        # Intercambiar la raíz con el último elemento
+        arr[0], arr[i] = arr[i], arr[0]
+        if mostrar:
+            print(f"Extracción: {arr}")
+        # Restaurar el Max Heap
+        heapify(arr, i, 0)
+    # --------------------------------------
+    # 3. Lista final
+    # --------------------------------------
+    if mostrar:
+        print("\n4. Lista final ordenada:")
+        print(arr)
+
+
+
+if __name__ == "__main__":
+
+    # ==========================================
+    # EJERCICIO 7: DEMOSTRACIÓN DEL ALGORITMO HEAP SORT
+    # ==========================================
+
+    
+
+    print("==========================================")
+    print("        HEAP SORT - MAX HEAP")
+    print("==========================================")
+
+    print("\n1. Lista original:")
+    datos = [12, 11, 13, 5, 6, 7]
+
+    print(datos)
+    lista = datos.copy()
+
+    # Ejecutar Heap Sort mostrando los pasos
+    heap_sort(lista, mostrar=True)
+
+    # ==============================================
+    # EJERCICIO 8: MEDICIÓN DE TIEMPOS DE EJECUCIÓN
+    # ==============================================
+
+    tamanos = [100, 500, 1000, 5000]
+
+    print("\n========== MEDICIÓN DE TIEMPOS ==========")
+
+    for cantidad in tamanos:
+
+        # Generar lista aleatoria
+        datos = [random.randint(1, 100) for _ in range(cantidad)]
+
+        # Crear una copia para ordenar
+        lista = datos.copy()
+
+        # Iniciar cronómetro
+        inicio = time.perf_counter()
+
+        # Algoritmo Heap Sort
+        heap_sort(lista)
+
+        # Finalizar cronómetro
+        fin = time.perf_counter()
+
+        # Calcular tiempo
+        tiempo = fin - inicio
+
+        print(f"\nCantidad de elementos: {cantidad}")
+        print(f"Tiempo de ejecución: {tiempo:.8f} segundos")
+
