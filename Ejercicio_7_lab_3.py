@@ -113,3 +113,69 @@ if __name__ == "__main__":
         print(f"\nCantidad de elementos: {cantidad}")
         print(f"Tiempo de ejecución: {tiempo:.8f} segundos")
 
+
+    # ==========================================
+    # EJERCICIO 9
+    # COMPORTAMIENTO DE LOS ALGORITMOS
+    # ==========================================
+
+    # Caso A: Lista aleatoria
+    lista_aleatoria = random.sample(range(1, 10000), 1000)
+
+    # Caso B: Lista ordenada
+    lista_ordenada = list(range(1000))
+
+    # Caso C: Lista ordenada inversamente
+    lista_invertida = list(range(1000, 0, -1))
+
+
+    # ----- Caso A -----
+
+    lista = lista_aleatoria.copy()
+
+    inicio = time.perf_counter()
+
+    heap_sort(lista)
+
+    fin = time.perf_counter()
+
+    tiempo_aleatorio = fin - inicio
+
+
+    # ----- Caso B -----
+
+    lista = lista_ordenada.copy()
+
+    inicio = time.perf_counter()
+
+    heap_sort(lista)
+
+    fin = time.perf_counter()
+
+    tiempo_ordenada = fin - inicio
+
+
+    # ----- Caso C -----
+
+    lista = lista_invertida.copy()
+
+    inicio = time.perf_counter()
+
+    heap_sort(lista)
+
+    fin = time.perf_counter()
+
+    tiempo_invertida = fin - inicio
+
+    print("\n==============================================")
+    print("       EJERCICIO 9 - HEAP SORT")
+    print("==============================================")
+
+    print("\nResultados:")
+
+    print("----------------------------------------------")
+    print("Algoritmo    | Aleatoria | Ordenada | Invertida")
+    print("----------------------------------------------")
+    print(f"Heap Sort    | "f"{tiempo_aleatorio:.8f} | "f"{tiempo_ordenada:.8f} | "f"{tiempo_invertida:.8f}"
+    )
+    print("----------------------------------------------")    
