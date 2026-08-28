@@ -6,10 +6,7 @@ import time
 # ==============================================
 
 def heapify(arr, n, i):
-    """
-    Mantiene la propiedad de Max Heap en el subárbol
-    cuyo nodo raíz está en la posición i.
-    """
+   
     mayor = i
     izquierdo = 2 * i + 1
     derecho = 2 * i + 2
